@@ -7,16 +7,14 @@ class TodosTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit root_url
-    assert_selector "h1", text: "Todos"
+    assert_selector 'h1', text: 'todos'
   end
 
   test "creating a Todo" do
     visit root_url
-    click_on "New Todo"
 
-    check "Completed" if @todo.completed
-    fill_in "Title", with: @todo.title
-    click_on "Create Todo"
+    fill_in 'todo_title', with: 'Learn Rails test'
+    find('#todo_title').native.send_keys(:return)
 
     assert_text "Todo was successfully created"
   end
@@ -25,9 +23,11 @@ class TodosTest < ApplicationSystemTestCase
     visit root_url
     click_on "Edit", match: :first
 
-    check "Completed" if @todo.completed
-    fill_in "Title", with: @todo.title
-    click_on "Update Todo"
+    within 'section.main' do
+      check "Completed" if @todo.completed
+      fill_in "Title", with: @todo.title
+      click_on "Update Todo"
+    end
 
     assert_text "Todo was successfully updated"
   end

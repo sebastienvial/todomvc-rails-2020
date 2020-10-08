@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Todomvc</title>
+    <title>TodoMVC Rails 6</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <section class="todoapp">
+      <%= render 'layouts/header' %>
+      <section class="main">
+        <%= yield %>
+      </section>
+    </section>
   </body>
 </html>
