@@ -13,6 +13,17 @@ This [TodoMVC](http://todomvc.com) application written in Rails 6 with [Turbolin
 3. From a terminal in your Gitpod workspace ensures that `git remote -v` includes both an `origin` remote pointing to your fork and an `upstream` remote pointing to `mas-rad/todomvc-rails-2020`.
 4. You are ready! :tada:
 
+## Working on an exercise
+
+Ensure that you gave the "write public repos" to Gitpod.io on: https://gitpod.io/access-control/
+
+1. Update your `upstream` remote with: `git fetch upstream`
+2. Optional, list available remote branch with: `git branch --remote`
+3. Create a new `exercise-XX` branch from the remote branch with `git checkout -b exercise-XX upstream/exercise-XX`
+4. Do the exercise and ensure that all tests are green with `bin/rails test test/*`
+5. Commit your changes
+6. Push your `exercise-XX` branch to your `origin` with: `git push origin`
+7. Visit [mas-rad/todomvc-rails-2020](https://github.com/mas-rad/todomvc-rails-2020) and open a pull request
 
 ## Author
 
