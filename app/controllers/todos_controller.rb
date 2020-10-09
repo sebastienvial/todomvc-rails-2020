@@ -58,6 +58,16 @@ class TodosController < ApplicationController
     end
   end
 
+  # DELETE /todos/clear_completed
+  # DELETE /todos/clear_completed.json
+  def clear_completed
+    Todo.completed.delete_all
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_url, notice: 'All completed todos were successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
