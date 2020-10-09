@@ -10,7 +10,11 @@ class TodosTest < ApplicationSystemTestCase
   end
 
   def selected_filter
-    first('ul.filters li a.selected').text
+    first('footer ul.filters li a.selected').text
+  end
+
+  def todos_counter
+    first('footer span.todo-count').text
   end
 
   test "visiting the index" do
@@ -23,6 +27,7 @@ class TodosTest < ApplicationSystemTestCase
       'Learn Stimulus JS'
     ], todos_title
     assert_equal 'All', selected_filter
+    assert_equal '2 items left', todos_counter
   end
 
   test "visiting the index with no todos" do
@@ -48,6 +53,7 @@ class TodosTest < ApplicationSystemTestCase
       'Learn Stimulus JS'
     ], todos_title
     assert_equal 'Active', selected_filter
+    assert_equal '2 items left', todos_counter
   end
 
   test "visiting completed todos" do
@@ -57,6 +63,7 @@ class TodosTest < ApplicationSystemTestCase
     assert_no_selector 'label', text: 'Learn Rails'
     assert_equal ['Install Ruby'], todos_title
     assert_equal 'Completed', selected_filter
+    assert_equal '2 items left', todos_counter
   end
 
   test "creating a Todo" do
@@ -72,6 +79,7 @@ class TodosTest < ApplicationSystemTestCase
       'Learn Stimulus JS',
       'Learn Rails test'
     ], todos_title
+    assert_equal '3 items left', todos_counter
   end
 
   test "marking a todo as completed or not" do
@@ -86,11 +94,13 @@ class TodosTest < ApplicationSystemTestCase
       'Install Ruby',
       'Learn Rails'
     ], completed_todos_title
+    assert_equal '1 item left', todos_counter
 
     first("ul.todo-list input.toggle:checked", visible: false).uncheck
 
     assert_no_selector 'li.completed', text: 'Install Ruby'
     assert_equal ['Learn Rails'], completed_todos_title
+    assert_equal '2 items left', todos_counter
   end
 
   test "deleting a todo" do
@@ -104,5 +114,6 @@ class TodosTest < ApplicationSystemTestCase
       'Learn Rails',
       'Learn Stimulus JS'
     ], todos_title
+    assert_equal '2 items left', todos_counter
   end
 end
