@@ -4,9 +4,16 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['item']
+  static targets = ['item', 'input']
 
   showInput(event) {
-    this.itemTarget.classList.add('editing')
+    if (!this.itemTarget.classList.contains('editing')) {
+      this.itemTarget.classList.add('editing')
+      this.inputTarget.focus()
+      this.inputTarget.setSelectionRange(
+        this.inputTarget.value.length,
+        this.inputTarget.value.length
+      )
+    }
   }
 }
