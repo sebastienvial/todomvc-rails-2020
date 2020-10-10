@@ -7,4 +7,8 @@ class Todo < ApplicationRecord
   def title=(string)
     super string.strip
   end
+
+  def self.toggle_all!
+    update_all(completed: active.any?)
+  end
 end
