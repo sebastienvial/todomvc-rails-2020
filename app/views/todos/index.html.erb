@@ -5,7 +5,11 @@
 <%= label_tag 'toggle-all', 'Mark all as complete' %>
 <ul class="todo-list">
   <% @todos.each do |todo| %>
-    <li class="<%= 'completed' if todo.completed? %>">
+    <li
+      class="<%= 'completed' if todo.completed? %>"
+      data-controller='editable'
+      data-target='editable.item'
+    >
       <div class="view">
         <%= check_box_tag nil, nil, todo.completed,
           data: {
@@ -17,9 +21,18 @@
           class: 'toggle',
           id: nil
         %>
-        <label><%= todo.title %></label>
+        <label
+          data-action='dblclick->editable#showInput'
+        ><%= todo.title %></label>
         <%= button_to(todo, remote: true, method: :delete, class: 'destroy') {} %>
       </div>
+      <%= form_with model: todo do |form| %>
+        <%= form.text_field :title,
+          required: true,
+          class: 'edit',
+          id: nil
+        %>
+      <% end %>
     </li>
   <% end %>
 </ul>
