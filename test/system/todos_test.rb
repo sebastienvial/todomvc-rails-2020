@@ -19,7 +19,6 @@ class TodosTest < ApplicationSystemTestCase
     click_on "Create Todo"
 
     assert_text "Todo was successfully created"
-    click_on "Back"
   end
 
   test "updating a Todo" do
@@ -31,7 +30,6 @@ class TodosTest < ApplicationSystemTestCase
     click_on "Update Todo"
 
     assert_text "Todo was successfully updated"
-    click_on "Back"
   end
 
   test "destroying a Todo" do

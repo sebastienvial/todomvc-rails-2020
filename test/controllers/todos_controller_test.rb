@@ -20,12 +20,18 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
       post todos_url, params: { todo: { completed: @todo.completed, title: @todo.title } }
     end
 
-    assert_redirected_to todo_url(Todo.last)
+    assert_redirected_to root_url
   end
 
-  test "should show todo" do
+  test "should redirect todo to root" do
     get todo_url(@todo)
+    assert_redirected_to root_url
+  end
+
+  test "should show JSON todo" do
+    get todo_url(@todo, format: :json)
     assert_response :success
+    assert_equal 'application/json; charset=utf-8', response.content_type
   end
 
   test "should get edit" do
@@ -35,7 +41,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
 
   test "should update todo" do
     patch todo_url(@todo), params: { todo: { completed: @todo.completed, title: @todo.title } }
-    assert_redirected_to todo_url(@todo)
+    assert_redirected_to root_url
   end
 
   test "should destroy todo" do
