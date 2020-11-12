@@ -10,11 +10,6 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_todo_url
-    assert_response :success
-  end
-
   test "should create todo" do
     assert_difference('Todo.count') do
       post todos_url, params: { todo: { completed: @todo.completed, title: @todo.title } }
